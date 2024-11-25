@@ -1,0 +1,19 @@
+﻿@{
+    var question = ViewBag.Question as QuizApp.Models.Question;
+    var questionNumber = ViewBag.QuestionNumber;
+}
+
+<h2>Question @questionNumber</h2>
+<p>@question.Text</p>
+
+<form method="post" action="/Home/SubmitAnswer">
+    @for (int i = 0; i < question.Options.Count; i++)
+    {
+        <div>
+            <input type="radio" id="option-@i" name="selectedOptionIndex" value="@i"
+            @(ViewBag.SelectedOptionIndex == i ? "checked" : "") />
+            <label for="option-@i">@question.Options[i]</label>
+        </div>
+    }
+    <button type="submit">Next</button>
+</form>
